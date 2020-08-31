@@ -26,5 +26,5 @@ jobs:
         docker push $IMAGE_ID:$VERSION
     - name: TEST
       run: |
-        docker run -v `pwd`:`pwd` -w `pwd` newbuild bash -c "CPPred-sORF.py -i data/lncRNA_testing.fa -s human -o Human_coding.result "
+        docker run -v `pwd`:`pwd` -w `pwd` newbuild bash -c "CPPred-sORF.py -i data/lncRNA_testing.fa -s Human -o Human_coding.result "
         head Human_coding.result
