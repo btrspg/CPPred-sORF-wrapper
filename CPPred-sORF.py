@@ -53,7 +53,7 @@ def output_feature(seq_file, hex_file, species, seq_fname):
                                         [seqid, inte_fe, Cov, insta_fe, T2, C0, PI_fe, Len, AC, T0, G0, C2, A4, G2, TG,
                                          A0, TC, G1, C3, T3, A1, GC, T1, G4, C1, G3, A3, gra_fe, hexamer, C4, AG,
                                          fickett_fe, A2, T4, C, G, A, T, mRNN_11codon, GCcount])) + "\n")
-        if species == "Integrated":
+        elif species == "Integrated":
             #			tem = [Cov,inte_fe,GC,insta_fe,Len,T0,fickett_fe,G2,C3,PI_fe,A3,C1,G3,hexamer,TG,G1,TC,A0,A1,AC,C2,G0,T4,C0,A4,G,A2,T,T3,G4,C4,gra_fe,T2,AG,AT,T1,A,C,mRNN_11codon,GCcount]
             #			feature.write("\t".join(map(str,[seqid,Cov,inte_fe,GC,insta_fe,Len,T0,fickett_fe,G2,C3,PI_fe,A3,C1,G3,hexamer,TG,G1,TC,A0,A1,AC,C2,G0,T4,C0,A4,G,A2,T,T3,G4,C4,gra_fe,T2,AG,AT,T1,A,C,mRNN_11codon,GCcount]))+"\n")
             tem = [Cov, PI_fe, hexamer, Len, fickett_fe, C0, C4, T1, TG, GCcount, T4, TC, GC, A4, G4, mRNN_11codon, AC,
@@ -62,7 +62,8 @@ def output_feature(seq_file, hex_file, species, seq_fname):
                                         [seqid, Cov, PI_fe, hexamer, Len, fickett_fe, C0, C4, T1, TG, GCcount, T4, TC,
                                          GC, A4, G4, mRNN_11codon, AC, T3, C3, A0, insta_fe, A1, inte_fe, G1, AG, T0,
                                          C1, G3, G0, gra_fe, AT, A3, T2, C, C2, G2, A, A2, G])) + "\n")
-
+        else:
+            raise ValueError('species should be human or integrated')
         tmp.write(str(out_label) + '\n')
         for label, item in enumerate(tem):
             tmp.write(str(label + 1) + ':' + str(item) + '\n')
@@ -109,7 +110,7 @@ def deleted(seq_fname):
 def main():
     parser = agp.ArgumentParser()
     parser.add_argument('-i', '--RNA_file', help="the input FASTA file of RNA sequence")
-    parser.add_argument('--species', '-s', help="the species", choices=['human', 'integrated'])
+    parser.add_argument('--species', '-s', help="the species", choices=['Human', 'Integrated'])
     parser.add_argument('-o', '--outfile', help="output file")
     parser.add_argument('--libsvm-bin', help='libsvm bin', default='/usr/local/bin')
     args = parser.parse_args()
