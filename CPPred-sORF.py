@@ -92,7 +92,7 @@ def output_feature(seq_file, hex_file, species, tmpdir):
     tmp.close()
 
 
-def predict(range_file, model_file, seq_fname, libsvm_bin, tmpdir):
+def predict(range_file, model_file, libsvm_bin, tmpdir):
     svm_scale = path_file(libsvm_bin, 'svm-scale ') + ' -r ' + range_file + ' ' \
                 + path_file(tmpdir, 'test.f_svm ') + ' > ' + path_file(tmpdir, 'test.scaled ')
     svm_predict = path_file(libsvm_bin, 'svm-predict ') + ' -b 1 ' \
@@ -118,7 +118,7 @@ def predict(range_file, model_file, seq_fname, libsvm_bin, tmpdir):
     coding_poten = open(path_file(tmpdir, 'coding_potential'), 'w')
     coding_poten.write("\t".join(map(str, ["table", path_file(tmpdir, 'coding_potential')])) + "\n")
 
-    for line in open(path_file(tmpdir, 'tmp.txt '), 'r').readlines():
+    for line in open(path_file(tmpdir, 'tmp.txt'), 'r').readlines():
         if line[0] == "l":
             continue
         coding_potential = line.split(" ")[1]
@@ -151,7 +151,7 @@ def main():
     tmpdir = get_tempdir()
     m_f, r_f, h_f = get_model_range_hexamer()
     output_feature(args.RNA_file, h_f, args.species, tmpdir.name)
-    predict(r_f, m_f, args.RNA_file.split(".")[0], args.libsvm_bin,tmpdir.name)
+    predict(r_f, m_f, args.libsvm_bin,tmpdir.name)
     merge(tmpdir.name,args.outfile)
     deleted(tmpdir)
 
