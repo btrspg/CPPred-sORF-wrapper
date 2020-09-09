@@ -111,7 +111,8 @@ def predict(range_file, model_file, seq_fname, libsvm_bin, tmpdir):
     # return 0
     print_and_run(svm_scale)
     print_and_run(svm_predict)
-
+    os.system("head "+path_file(tmpdir, 'tmp.txt '))
+    os.system("head " + path_file(tmpdir, 'tmp2.txt '))
     coding_poten = open(path_file(tmpdir, 'coding_potential'), 'w')
     coding_poten.write("\t".join(map(str, ["table", path_file(tmpdir, 'coding_potential')])) + "\n")
 
