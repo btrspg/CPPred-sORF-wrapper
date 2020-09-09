@@ -109,8 +109,10 @@ def predict(range_file, model_file, seq_fname, libsvm_bin, tmpdir):
     #     libsvm_bin + '/svm-predict -b 1' + ' ' + seq_fname + '_test.scaled ' + model_file + ' ' + seq_fname + '_tmp.txt >' + seq_fname + '_tmp2.txt')
     # print ('../libsvm-3.22/svm-predict -b 1'+' '+seq_fname+'_test.scaled ' + model_file +' '+seq_fname+'_tmp.txt >' +seq_fname+'_tmp2.txt')
     # return 0
+    print_and_run('ls -R '+ tmpdir)
     print_and_run(svm_scale)
     print_and_run(svm_predict)
+    os.system('ls -R '+ tmpdir)
     os.system("head "+path_file(tmpdir, 'tmp.txt '))
     os.system("head " + path_file(tmpdir, 'tmp2.txt '))
     coding_poten = open(path_file(tmpdir, 'coding_potential'), 'w')
